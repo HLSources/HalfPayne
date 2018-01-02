@@ -10,10 +10,26 @@
 #include "../cl_dll/cl_dll.h"
 #endif // CLIENT_DLL
 
+#include <vector>
+
 class GameplayMods
 {
 public:
-	BOOL instaGib = FALSE;
+	std::vector<TYPEDESCRIPTION> fields;
+	int fieldCounter = 1;
+	template<typename T> T Field( T *address, T default, FIELDTYPE type, short count = 1 ) {	
+		int offset = ( size_t ) address - ( size_t ) this;
+
+		std::string fieldName = "gameplayModsField" + std::to_string( fieldCounter );
+		fieldCounter++;
+
+		this->fields.push_back(
+			{ type, _strdup( fieldName.c_str() ), offset, count, 0 }
+		);
+		return default;
+	}
+
+	BOOL instaGib = Field( &instaGib, FALSE, FIELD_BOOLEAN );
 
 	void Init();
 
@@ -22,6 +38,8 @@ public:
 	int Save( CSave &save );
 	int Restore( CRestore &restore );
 #endif // CLIENT_DLL
+
+
 };
 
 extern GameplayMods gameplayMods;

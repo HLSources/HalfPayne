@@ -24,16 +24,12 @@ void GameplayMods::Init() {
 
 #ifndef CLIENT_DLL
 
-TYPEDESCRIPTION gameplayModsSaveData[] = {
-	DEFINE_FIELD( GameplayMods, instaGib, FIELD_BOOLEAN )
-};
-
 int GameplayMods::Save( CSave &save ) {
-	return save.WriteFields( "GAMEPLAY_MODS", &gameplayMods, gameplayModsSaveData, ARRAYSIZE( gameplayModsSaveData ) );
+	return save.WriteFields( "GAMEPLAY_MODS", this, fields.data(), fields.size() );
 }
 
 int GameplayMods::Restore( CRestore &restore ) {
-	return restore.ReadFields( "GAMEPLAY_MODS", &gameplayMods, gameplayModsSaveData, ARRAYSIZE( gameplayModsSaveData ) );
+	return restore.ReadFields( "GAMEPLAY_MODS", this, fields.data(), fields.size() );
 }
 
 void GameplayMods::SendToClient() {

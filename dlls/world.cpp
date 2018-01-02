@@ -485,7 +485,6 @@ void CWorld :: Spawn( void )
 {
 	g_fGameOver = FALSE;
 	Precache( );
-	gameplayMods.Init();
 }
 
 void CWorld :: Precache( void )
