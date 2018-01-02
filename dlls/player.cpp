@@ -41,6 +41,8 @@
 #include "client.h"
 #include "func_break.h"
 
+#include "gameplay_mod.h"
+
 extern cvar_t *g_gl_vsync;
 extern bool using_sys_timescale;
 extern int g_changeLevelOccured;
@@ -234,7 +236,6 @@ TYPEDESCRIPTION	CBasePlayer::m_playerSaveData[] =
 	DEFINE_FIELD( CBasePlayer, infinitePainkillers, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, weaponRestricted, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, noSmgGrenadePickup, FIELD_BOOLEAN ),
-	DEFINE_FIELD( CBasePlayer, instaGib, FIELD_BOOLEAN ),
 
 	DEFINE_FIELD( CBasePlayer, preventMonsterDrops, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, preventMonsterMovement, FIELD_BOOLEAN ),
@@ -4108,7 +4109,6 @@ void CBasePlayer::Spawn( void )
 	infinitePainkillers = false;
 	weaponRestricted = false;
 	noSmgGrenadePickup = false;
-	instaGib = false;
 	swearOnKill = false;
 	crossbowExplosiveBolts = false;
 
@@ -5642,6 +5642,8 @@ void CBasePlayer :: UpdateClientData( void )
 	if ( !using_sys_timescale ) {
 		ApplyFPSCap( );
 	}
+
+	gameplayMods.SendToClient();
 
 	char com[256];
 	if ( using_sys_timescale ) {

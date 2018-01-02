@@ -399,6 +399,9 @@
     <ClCompile Include="..\..\cl_dll\counter.cpp">
       <Filter>Source Files\cl_dll</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\game_shared\gameplay_mod.cpp">
+      <Filter>Source Files\game_shared</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\cl_dll\kbutton.h">
@@ -588,6 +591,9 @@
       <Filter>Header Files\cl_dll</Filter>
     </ClInclude>
     <ClInclude Include="..\..\game_shared\fs_aux.h">
+      <Filter>Header Files\game_shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\game_shared\gameplay_mod.h">
       <Filter>Header Files\game_shared</Filter>
     </ClInclude>
   </ItemGroup>

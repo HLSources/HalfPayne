@@ -390,6 +390,9 @@
     <ClCompile Include="..\..\dlls\kerotan.cpp">
       <Filter>Source Files\dlls</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\game_shared\gameplay_mod.cpp">
+      <Filter>Source Files\game_shared</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\dlls\doors.h">
@@ -556,6 +559,9 @@
     </ClInclude>
     <ClInclude Include="..\..\dlls\kerotan.h">
       <Filter>Header Files\dlls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\game_shared\gameplay_mod.h">
+      <Filter>Header Files\game_shared</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

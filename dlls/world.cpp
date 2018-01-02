@@ -34,6 +34,7 @@
 #include "gamerules.h"
 #include "teamplay_gamerules.h"
 #include "cgm_gamerules.h"
+#include "gameplay_mod.h"
 
 extern CGraph WorldGraph;
 extern CSoundEnt *pSoundEnt;
@@ -439,11 +440,12 @@ void CGlobalState::ClearStates( void )
 	Reset();
 }
 
-
 void SaveGlobalState( SAVERESTOREDATA *pSaveData )
 {
 	CSave saveHelper( pSaveData );
 	gGlobalState.Save( saveHelper );
+	
+	gameplayMods.Save( saveHelper );
 }
 
 
@@ -451,6 +453,8 @@ void RestoreGlobalState( SAVERESTOREDATA *pSaveData )
 {
 	CRestore restoreHelper( pSaveData );
 	gGlobalState.Restore( restoreHelper );
+
+	gameplayMods.Restore( restoreHelper );
 }
 
 
@@ -481,6 +485,7 @@ void CWorld :: Spawn( void )
 {
 	g_fGameOver = FALSE;
 	Precache( );
+	gameplayMods.Init();
 }
 
 void CWorld :: Precache( void )

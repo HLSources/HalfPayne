@@ -5,6 +5,7 @@
 #include <sstream>
 #include "sha1.h"
 #include "fs_aux.h"
+#include "gameplay_mod.h"
 
 int CustomGameModeConfig::GetAllowedItemIndex( const char *allowedItem ) {
 
@@ -1396,7 +1397,9 @@ bool CustomGameModeConfig::AddGameplayMod( ConfigSectionData &data ) {
 			"Instagib",
 			"Gauss Gun becomes much more deadly with 9999 damage, also gets red beam and slower rate of fire.\n"
 			"More gibs come out.",
-			[]( CBasePlayer *player ) { player->instaGib = true; }
+			[]( CBasePlayer *player ) {
+				gameplayMods.instaGib = TRUE;
+			}
 		) );
 		return true;
 	}

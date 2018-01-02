@@ -572,7 +572,6 @@ public:
 	BOOL infinitePainkillers;
 	BOOL weaponRestricted;
 	BOOL noSmgGrenadePickup;
-	BOOL instaGib;
 	BOOL crossbowExplosiveBolts;
 
 	BOOL healOnKill;
@@ -635,9 +634,6 @@ public:
 
 	int PackGameplayMods() {
 		int bitmask = 0;
-		if ( instaGib ) {
-			bitmask |= GAMEPLAY_MOD_PLAYER_BITMASK_INSTAGIB;
-		}
 		if ( shouldProducePhysicalBullets ) {
 			bitmask |= GAMEPLAY_MOD_PLAYER_BITMASK_SHOULD_PRODUCE_PHYSICAL_BULLETS;
 		}

@@ -31,6 +31,7 @@
 #include "func_break.h"
 #include "player.h"
 #include "gamerules.h"
+#include "gameplay_mod.h"
 
 extern DLL_GLOBAL Vector		g_vecAttackDir;
 extern DLL_GLOBAL int			g_iSkillLevel;
@@ -356,7 +357,7 @@ void CBaseMonster :: GibMonster( void )
 	int gibCount = 4;
 	CBasePlayer *player = ( CBasePlayer * ) CBasePlayer::Instance( g_engfuncs.pfnPEntityOfEntIndex( 1 ) );
 	if ( player ) {
-		if ( player->instaGib ) {
+		if ( gameplayMods.instaGib ) {
 			gibCount *= 4;
 		}
 
