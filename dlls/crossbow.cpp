@@ -22,6 +22,7 @@
 #include "nodes.h"
 #include "player.h"
 #include "gamerules.h"
+#include "gameplay_mod.h"
 
 #ifndef CLIENT_DLL
 #define BOLT_AIR_VELOCITY	2000
@@ -475,7 +476,7 @@ void CCrossbow::FireBolt()
 
 void CCrossbow::SecondaryAttack()
 {
-	if ( m_pPlayer->noSecondaryAttack ) {
+	if ( gameplayMods.noSecondaryAttack ) {
 		return;
 	}
 

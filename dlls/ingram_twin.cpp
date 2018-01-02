@@ -5,6 +5,7 @@
 #include "weapons.h"
 #include "nodes.h"
 #include "player.h"
+#include "gameplay_mod.h"
 
 LINK_ENTITY_TO_CLASS( weapon_ingram_twin, CIngramTwin );
 
@@ -177,7 +178,7 @@ void CIngramTwin::PrimaryAttack( void )
 		}
 
 #ifndef CLIENT_DLL
-		if ( m_pPlayer->shouldProducePhysicalBullets ) {
+		if ( gameplayMods.shouldProducePhysicalBullets ) {
 
 			float rightOffset = i == 0 ? 8 : -8;
 
@@ -214,8 +215,8 @@ void CIngramTwin::PrimaryAttack( void )
 
 	// There's not enough room for float type, so it's interpreted as int
 	int stressPacked = *( int * ) &stress;
-	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usFireIngram, 0.0, ( float * ) &g_vecZero, ( float * ) &g_vecZero, 0.0f, 0.0f, emptyFlag, stressPacked, m_pPlayer->shouldProducePhysicalBullets, shootingBoth ? 2 : shootingLeft ? 1 : 0 );
-	if ( !m_pPlayer->shouldProducePhysicalBullets ) {
+	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usFireIngram, 0.0, ( float * ) &g_vecZero, ( float * ) &g_vecZero, 0.0f, 0.0f, emptyFlag, stressPacked, gameplayMods.shouldProducePhysicalBullets, shootingBoth ? 2 : shootingLeft ? 1 : 0 );
+	if ( !gameplayMods.shouldProducePhysicalBullets ) {
 		if ( shootingRight ) {
 			PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usFireIngramTracer, 0.0, ( float * ) &g_vecZero, ( float * ) &g_vecZero, vecDir.x, vecDir.y, 0, 0, 0, true /* shooting right */ );
 		}

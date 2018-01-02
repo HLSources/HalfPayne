@@ -15,7 +15,11 @@ void GameplayMods::Init() {
 #else
 	gEngfuncs.pfnHookUserMsg( "GmplayMod", []( const char *pszName, int iSize, void *pbuf ) -> int {
 		BEGIN_READ( pbuf, iSize );
+		gameplayMods.automaticShotgun = READ_BYTE();
 		gameplayMods.instaGib = READ_BYTE();
+		gameplayMods.noSecondaryAttack = READ_BYTE();
+		gameplayMods.shouldProducePhysicalBullets = READ_BYTE();
+		gameplayMods.snarkNuclear = READ_BYTE();
 
 		return 1;
 	} );
@@ -38,7 +42,11 @@ void GameplayMods::SendToClient() {
 	}
 
 	MESSAGE_BEGIN( MSG_ALL, gmsgGmplayMod );
+		WRITE_BYTE( automaticShotgun );
 		WRITE_BYTE( instaGib );
+		WRITE_BYTE( noSecondaryAttack );
+		WRITE_BYTE( shouldProducePhysicalBullets );
+		WRITE_BYTE( snarkNuclear );
 	MESSAGE_END();
 }
 

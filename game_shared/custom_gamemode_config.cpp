@@ -1535,7 +1535,9 @@ bool CustomGameModeConfig::AddGameplayMod( ConfigSectionData &data ) {
 			GAMEPLAY_MOD_NO_SECONDARY_ATTACK,
 			"No secondary attack",
 			"Disables the secondary attack on all weapons.",
-			[]( CBasePlayer *player ) { player->noSecondaryAttack = true; }
+			[]( CBasePlayer *player ) {
+			gameplayMods.noSecondaryAttack = true;
+			}
 		) );
 		return true;
 	}
@@ -1653,7 +1655,9 @@ bool CustomGameModeConfig::AddGameplayMod( ConfigSectionData &data ) {
 			GAMEPLAY_MOD_SHOTGUN_AUTOMATIC,
 			"Automatic shotgun",
 			"Shotgun only fires single shots and doesn't have to be reloaded after each shot.",
-			[]( CBasePlayer *player ) { player->automaticShotgun = true; }
+			[]( CBasePlayer *player ) {
+				gameplayMods.automaticShotgun = true;
+			}
 		) );
 		return true;
 	}
@@ -1809,7 +1813,9 @@ bool CustomGameModeConfig::AddGameplayMod( ConfigSectionData &data ) {
 			GAMEPLAY_MOD_SNARK_NUCLEAR,
 			"Snark nuclear",
 			"Killing snark produces a grenade-like explosion.",
-			[]( CBasePlayer *player ) { player->snarkNuclear = true; }
+			[]( CBasePlayer *player ) {
+				gameplayMods.snarkNuclear = true;
+			}
 		) );
 		return true;
 	}

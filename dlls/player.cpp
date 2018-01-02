@@ -218,7 +218,6 @@ TYPEDESCRIPTION	CBasePlayer::m_playerSaveData[] =
 	DEFINE_FIELD( CBasePlayer, noJumping, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, noWalking, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, slowmotionFastWalk, FIELD_BOOLEAN ),
-	DEFINE_FIELD( CBasePlayer, noSecondaryAttack, FIELD_BOOLEAN ),
 
 	DEFINE_FIELD( CBasePlayer, bulletPhysicsMode, FIELD_INTEGER ),
 	DEFINE_FIELD( CBasePlayer, bulletRicochetCount, FIELD_INTEGER ),
@@ -229,7 +228,6 @@ TYPEDESCRIPTION	CBasePlayer::m_playerSaveData[] =
 	DEFINE_FIELD( CBasePlayer, bulletDelayOnSlowmotion, FIELD_BOOLEAN ),
 
 	DEFINE_FIELD( CBasePlayer, weaponImpact, FIELD_FLOAT ),
-	DEFINE_FIELD( CBasePlayer, automaticShotgun, FIELD_BOOLEAN ),
 
 	DEFINE_FIELD( CBasePlayer, infiniteAmmo, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, infiniteAmmoClip, FIELD_BOOLEAN ),
@@ -289,7 +287,6 @@ TYPEDESCRIPTION	CBasePlayer::m_playerSaveData[] =
 	DEFINE_FIELD( CBasePlayer, snarkPenguins, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, snarkInception, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, snarkInceptionDepth, FIELD_INTEGER ),
-	DEFINE_FIELD( CBasePlayer, snarkNuclear, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, snarkStayAlive, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, snarkInfestation, FIELD_BOOLEAN ),
 	DEFINE_FIELD( CBasePlayer, snarkFromExplosion, FIELD_BOOLEAN ),
@@ -3569,8 +3566,8 @@ void CBasePlayer::PostThink()
 		delayedMusicStartTime = 0.0f;
 	}
 
-	shouldProducePhysicalBullets = ( bulletPhysicsMode == BULLET_PHYSICS_CONSTANT ) ||
-								   ( slowMotionEnabled && bulletPhysicsMode == BULLET_PHYSICS_ENEMIES_AND_PLAYER_ON_SLOWMOTION );
+	gameplayMods.shouldProducePhysicalBullets = ( bulletPhysicsMode == BULLET_PHYSICS_CONSTANT ) ||
+												( slowMotionEnabled && bulletPhysicsMode == BULLET_PHYSICS_ENEMIES_AND_PLAYER_ON_SLOWMOTION );
 
 // check to see if player landed hard enough to make a sound
 // falling farther than half of the maximum safe distance, but not as far a max safe distance will
@@ -3964,7 +3961,6 @@ void CBasePlayer::Spawn( void )
 
 	noPills = false;
 	noHealing = false;
-	noSecondaryAttack = false;
 	noJumping = false;
 	noWalking = false;
 	slowmotionFastWalk = false;
@@ -3995,7 +3991,6 @@ void CBasePlayer::Spawn( void )
 	jumpedOnce = FALSE;
 
 	bulletPhysicsMode = BULLET_PHYSICS_ENEMIES_ONLY_ON_SLOWMOTION;
-	shouldProducePhysicalBullets = false;
 
 	bulletSelfHarm = false;
 	bulletTrailConstant = false;
@@ -4006,7 +4001,6 @@ void CBasePlayer::Spawn( void )
 	bulletRicochetMaxDotProduct = 0.5;
 
 	weaponImpact = 0.0f;
-	automaticShotgun = FALSE;
 
 	desperation = DESPERATION_NO;
 
@@ -4121,7 +4115,6 @@ void CBasePlayer::Spawn( void )
 
 	snarkInception = false;
 	snarkInceptionDepth = 10;
-	snarkNuclear = false;
 	snarkStayAlive = false;
 	snarkInfestation = false;
 	snarkFromExplosion = false;

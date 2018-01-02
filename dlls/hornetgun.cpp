@@ -23,7 +23,7 @@
 #include "player.h"
 #include "hornet.h"
 #include "gamerules.h"
-
+#include "gameplay_mod.h"
 
 enum hgun_e {
 	HGUN_IDLE1 = 0,
@@ -191,7 +191,7 @@ void CHgun::PrimaryAttack()
 
 void CHgun::SecondaryAttack( void )
 {
-	if ( m_pPlayer->noSecondaryAttack ) {
+	if ( gameplayMods.noSecondaryAttack ) {
 		return;
 	}
 

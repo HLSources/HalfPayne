@@ -22,7 +22,7 @@
 #include "nodes.h"
 #include "player.h"
 #include "gamerules.h"
-
+#include "gameplay_mod.h"
 
 
 
@@ -502,7 +502,7 @@ void CRpg::PrimaryAttack()
 
 void CRpg::SecondaryAttack()
 {
-	if ( m_pPlayer->noSecondaryAttack ) {
+	if ( gameplayMods.noSecondaryAttack ) {
 		return;
 	}
 

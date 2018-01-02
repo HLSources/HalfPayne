@@ -20,6 +20,7 @@
 #include "weapons.h"
 #include "nodes.h"
 #include "player.h"
+#include "gameplay_mod.h"
 
 enum glock_twin_e {
 	GLOCK_TWIN_IDLE = 0,
@@ -282,7 +283,7 @@ void CGlockTwin::GlockFire( float flSpread, float flCycleTime, BOOL fUseAutoAim 
 	}
 
 #ifndef CLIENT_DLL
-	if ( m_pPlayer->shouldProducePhysicalBullets ) {
+	if ( gameplayMods.shouldProducePhysicalBullets ) {
 
 		float rightOffset = shootingRight ? 8 : -8;
 
@@ -302,7 +303,7 @@ void CGlockTwin::GlockFire( float flSpread, float flCycleTime, BOOL fUseAutoAim 
 
 	int empty = ( m_iClip == 0 ) ? 1 : 0;
 	int empty2 = ( m_iClip2 == 0 ) ? 1 : 0;
-	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), fUseAutoAim ? m_usFireGlock1 : m_usFireGlock2, 0.0, ( float * ) &g_vecZero, ( float * ) &g_vecZero, vecDir.x, vecDir.y, empty, empty2, m_pPlayer->shouldProducePhysicalBullets, shootingRight );
+	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), fUseAutoAim ? m_usFireGlock1 : m_usFireGlock2, 0.0, ( float * ) &g_vecZero, ( float * ) &g_vecZero, vecDir.x, vecDir.y, empty, empty2, gameplayMods.shouldProducePhysicalBullets, shootingRight );
 
 	m_flNextPrimaryAttack = m_flNextSecondaryAttack = GetNextAttackDelay( flCycleTime );
 	shotOnce = true;

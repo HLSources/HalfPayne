@@ -104,14 +104,6 @@ enum sbar_data
 	SBAR_END,
 };
 
-enum GAMEPLAY_MOD_PLAYER_BITMASK {
-	GAMEPLAY_MOD_PLAYER_BITMASK_INSTAGIB							= 1 << 0,
-	GAMEPLAY_MOD_PLAYER_BITMASK_SHOULD_PRODUCE_PHYSICAL_BULLETS	= 1 << 1,
-	GAMEPLAY_MOD_PLAYER_BITMASK_NO_SECONDARY_ATTACK				= 1 << 2,
-	GAMEPLAY_MOD_PLAYER_BITMASK_SNARK_NUCLEAR				= 1 << 3,
-	GAMEPLAY_MOD_PLAYER_BITMASK_SHOTGUN_AUTOMATIC = 1 << 4
-};
-
 #define CHAT_INTERVAL 1.0f
 
 class CBasePlayer : public CBaseMonster
@@ -523,13 +515,13 @@ public:
 
 	BOOL noPills;
 	BOOL noHealing;
-	BOOL noSecondaryAttack;
+	
 	BOOL noJumping;
 	BOOL noWalking;
 	BOOL slowmotionFastWalk;
 
 	BULLET_PHYSICS_MODE bulletPhysicsMode;
-	BOOL shouldProducePhysicalBullets;
+	
 	BOOL bulletSelfHarm;
 	BOOL bulletTrailConstant;
 	BOOL bulletDelayOnSlowmotion;
@@ -538,7 +530,6 @@ public:
 	int bulletRicochetError;
 	float bulletRicochetMaxDotProduct;
 
-	BOOL automaticShotgun;
 	float weaponImpact;
 
 	// Statistics
@@ -606,7 +597,7 @@ public:
 
 	BOOL snarkInception;
 	int snarkInceptionDepth;
-	BOOL snarkNuclear;
+
 	BOOL snarkStayAlive;
 	BOOL snarkInfestation;
 	BOOL snarkFromExplosion;
@@ -631,23 +622,6 @@ public:
 	void PlayMusicDelayed( const std::string &filePath, float delay, float musicPos = 0.0f, BOOL looping = FALSE, BOOL noSlowmotionEffects = FALSE );
 	void SendPlayMusicMessage( const std::string &filePath, float musicPos = 0.0f, BOOL looping = FALSE, BOOL noSlowmotionEffects = FALSE );
 	void SendStopMusicMessage( BOOL smooth = false );
-
-	int PackGameplayMods() {
-		int bitmask = 0;
-		if ( shouldProducePhysicalBullets ) {
-			bitmask |= GAMEPLAY_MOD_PLAYER_BITMASK_SHOULD_PRODUCE_PHYSICAL_BULLETS;
-		}
-		if ( noSecondaryAttack ) {
-			bitmask |= GAMEPLAY_MOD_PLAYER_BITMASK_NO_SECONDARY_ATTACK;
-		}
-		if ( automaticShotgun ) {
-			bitmask |= GAMEPLAY_MOD_PLAYER_BITMASK_SHOTGUN_AUTOMATIC;
-		}
-		if ( snarkNuclear ) {
-			bitmask |= GAMEPLAY_MOD_PLAYER_BITMASK_SNARK_NUCLEAR;
-		}
-		return bitmask;
-	}
 
 	string_t musicFile;
 	float	 musicPos;

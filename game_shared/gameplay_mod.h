@@ -29,7 +29,11 @@ public:
 		return default;
 	}
 
+	BOOL automaticShotgun = Field( &automaticShotgun, FALSE, FIELD_BOOLEAN );
 	BOOL instaGib = Field( &instaGib, FALSE, FIELD_BOOLEAN );
+	BOOL noSecondaryAttack = Field( &noSecondaryAttack, FALSE, FIELD_BOOLEAN );
+	BOOL shouldProducePhysicalBullets = Field( &shouldProducePhysicalBullets, FALSE, FIELD_BOOLEAN );
+	BOOL snarkNuclear = Field( &snarkNuclear, FALSE, FIELD_BOOLEAN );
 
 	void Init();
 

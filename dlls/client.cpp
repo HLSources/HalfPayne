@@ -1932,7 +1932,6 @@ void UpdateClientData ( const edict_t *ent, int sendweapons, struct clientdata_s
 	cd->weaponanim		= pev->weaponanim;
 
 	cd->pushmsec		= pev->pushmsec;
-	cd->iuser4			= pl->PackGameplayMods();
 
 	//Spectator mode
 	if ( pevOrg != NULL )

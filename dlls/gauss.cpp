@@ -170,7 +170,7 @@ void CGauss::PrimaryAttack()
 
 void CGauss::SecondaryAttack()
 {
-	if ( m_pPlayer->noSecondaryAttack ) {
+	if ( gameplayMods.noSecondaryAttack ) {
 		return;
 	}
 

@@ -1706,7 +1706,7 @@ Vector CBaseEntity::FireBulletsPlayer ( ULONG cShots, Vector vecSrc, Vector vecD
 						x * vecSpread.x * vecRight +
 						y * vecSpread.y * vecUp;
 
-		if ( player->shouldProducePhysicalBullets ) {
+		if ( gameplayMods.shouldProducePhysicalBullets ) {
 			CBullet::BulletCreate(
 				vecSrc, vecDir * ( player->bulletDelayOnSlowmotion && player->slowMotionEnabled ? 40 : 2000 ), iBulletType, ( BOOL ) ( player->slowMotionEnabled || player->bulletTrailConstant ), edict(),
 				player->bulletRicochetCount, player->bulletRicochetError, player->bulletRicochetMaxDotProduct, player->bulletSelfHarm

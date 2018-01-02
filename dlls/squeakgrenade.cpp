@@ -23,6 +23,7 @@
 #include "player.h"
 #include "soundent.h"
 #include "cgm_gamerules.h"
+#include "gameplay_mod.h"
 
 enum w_squeak_e {
 	WSQUEAK_IDLE1 = 0,
@@ -135,7 +136,7 @@ void CSqueakGrenade :: Spawn( void )
 		stayAlive = pPlayer->snarkStayAlive;
 		inception = pPlayer->snarkInception;
 		inceptionDepth = pPlayer->snarkInceptionDepth;
-		nuclear = pPlayer->snarkNuclear;
+		nuclear = gameplayMods.snarkNuclear;
 		isPenguin = pPlayer->snarkPenguins;
 		if ( isPenguin ) {
 			SET_MODEL(ENT(pev), "models/w_pingu.mdl");
@@ -603,7 +604,7 @@ void CSqueak::Holster( int skiplocal /* = 0 */ )
 		return;
 	}
 	
-	SendWeaponAnim( SQUEAK_DOWN, 1, !m_pPlayer->snarkNuclear );
+	SendWeaponAnim( SQUEAK_DOWN, 1, !gameplayMods.snarkNuclear );
 	EMIT_SOUND(ENT(m_pPlayer->pev), CHAN_WEAPON, "common/null.wav", 1.0, ATTN_NORM);
 }
 
@@ -683,7 +684,7 @@ void CSqueak::WeaponIdle( void )
 #ifndef CLIENT_DLL
 	if ( m_pPlayer->snarkPenguins ) {
 		MESSAGE_BEGIN( MSG_ONE, gmsgSetSkin, NULL, m_pPlayer->pev );
-			WRITE_BYTE( m_pPlayer->snarkNuclear ? 0 : 1 );
+			WRITE_BYTE( gameplayMods.snarkNuclear ? 0 : 1 );
 		MESSAGE_END();
 	}
 #endif
@@ -701,7 +702,7 @@ void CSqueak::WeaponIdle( void )
 			return;
 		}
 
-		SendWeaponAnim( SQUEAK_UP, 1, !m_pPlayer->snarkNuclear );
+		SendWeaponAnim( SQUEAK_UP, 1, !gameplayMods.snarkNuclear );
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + UTIL_SharedRandomFloat( m_pPlayer->random_seed, 10, 15 );
 		return;
 	}
@@ -723,7 +724,7 @@ void CSqueak::WeaponIdle( void )
 		iAnim = SQUEAK_FIDGETNIP;
 		m_flTimeWeaponIdle = UTIL_WeaponTimeBase() + 80.0 / 16.0;
 	}
-	SendWeaponAnim( iAnim, 1, !m_pPlayer->snarkNuclear );
+	SendWeaponAnim( iAnim, 1, !gameplayMods.snarkNuclear );
 }
 
 #endif

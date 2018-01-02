@@ -22,6 +22,7 @@
 #include "player.h"
 #include "soundent.h"
 #include "gamerules.h"
+#include "gameplay_mod.h"
 
 enum mp5_e
 {
@@ -179,7 +180,7 @@ void CMP5::PrimaryAttack()
 	Vector vecBullet = VECTOR_CONE_2DEGREES * stress;
 
 #ifndef CLIENT_DLL
-	if ( m_pPlayer->shouldProducePhysicalBullets ) {
+	if ( gameplayMods.shouldProducePhysicalBullets ) {
 
 		float rightOffset = 2;
 		if ( m_pPlayer->upsideDown ) {
@@ -218,7 +219,7 @@ void CMP5::PrimaryAttack()
 	// There's not enough room for float type, so it's interpreted as int
 	int stressPacked = *( int * ) &stress;
 
-	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usMP5, 0.0, (float *)&g_vecZero, (float *)&g_vecZero, vecDir.x, vecDir.y, stressPacked, 0, m_pPlayer->shouldProducePhysicalBullets, 0 );
+	PLAYBACK_EVENT_FULL( flags, m_pPlayer->edict(), m_usMP5, 0.0, (float *)&g_vecZero, (float *)&g_vecZero, vecDir.x, vecDir.y, stressPacked, 0, gameplayMods.shouldProducePhysicalBullets, 0 );
 
 	if (!m_iClip && m_pPlayer->m_rgAmmo[m_iPrimaryAmmoType] <= 0)
 		// HEV suit - indicate out of ammo condition
@@ -244,7 +245,7 @@ void CMP5::PrimaryAttack()
 
 void CMP5::SecondaryAttack( void )
 {
-	if ( m_pPlayer->noSecondaryAttack ) {
+	if ( gameplayMods.noSecondaryAttack ) {
 		return;
 	}
 	// don't fire underwater
