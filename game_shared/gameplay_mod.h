@@ -16,24 +16,21 @@ class GameplayMods
 {
 public:
 	std::vector<TYPEDESCRIPTION> fields;
-	int fieldCounter = 1;
-	template<typename T> T Field( T *address, T default, FIELDTYPE type, short count = 1 ) {	
-		int offset = ( size_t ) address - ( size_t ) this;
-
-		std::string fieldName = "gameplayModsField" + std::to_string( fieldCounter );
-		fieldCounter++;
+	template<typename T> T _Field( int offset, T default, FIELDTYPE type, short count = 1 ) {
+		std::string fieldName = "gameplayModsField" + std::to_string( fields.size() + 1 );
 
 		this->fields.push_back(
 			{ type, _strdup( fieldName.c_str() ), offset, count, 0 }
 		);
 		return default;
 	}
+#define Field( ctype, name, default, type, ... ) ctype name = _Field( offsetof( GameplayMods, name ), default, type, ##__VA_ARGS__ )
 
-	BOOL automaticShotgun = Field( &automaticShotgun, FALSE, FIELD_BOOLEAN );
-	BOOL instaGib = Field( &instaGib, FALSE, FIELD_BOOLEAN );
-	BOOL noSecondaryAttack = Field( &noSecondaryAttack, FALSE, FIELD_BOOLEAN );
-	BOOL shouldProducePhysicalBullets = Field( &shouldProducePhysicalBullets, FALSE, FIELD_BOOLEAN );
-	BOOL snarkNuclear = Field( &snarkNuclear, FALSE, FIELD_BOOLEAN );
+	Field( BOOL, automaticShotgun, FALSE, FIELD_BOOLEAN );
+	Field( BOOL, instaGib, FALSE, FIELD_BOOLEAN );
+	Field( BOOL, noSecondaryAttack, FALSE, FIELD_BOOLEAN );
+	Field( BOOL, shouldProducePhysicalBullets, FALSE, FIELD_BOOLEAN );
+	Field( BOOL, snarkNuclear, FALSE, FIELD_BOOLEAN );
 
 	void Init();
 
